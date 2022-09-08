@@ -9,32 +9,32 @@ public class Card : MonoBehaviour
     public string elementName;
     public int type;
 
-    void setName(string n)
+    public void setName(string n)
     {
-        name = n;
+        elementName = n;
     }
     
-    void setNumber(int n)
+    public void setNumber(int n)
     {
         atmoicNumber = n;
     }
 
-    void setType(int t)
+    public void setType(int t)
     {
         type = t;
     }
 
-    string getName()
+    public string getName()
     {
-        return name;
+        return elementName;
     }
 
-    int getNumber()
+    public int getNumber()
     {
         return atmoicNumber;
     }
 
-    int getType()
+    public int getType()
     {
         return type;
     }

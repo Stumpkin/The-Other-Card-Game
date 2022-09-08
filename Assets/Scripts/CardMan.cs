@@ -15,7 +15,7 @@ public class CardMan : MonoBehaviour
     // then on the initial draw phase draw 5 cards from the deck then its placed into your hand
     void Start()
     {
-        
+        Debug.Log(Application.dataPath);
     }
 
     // Update is called once per frame

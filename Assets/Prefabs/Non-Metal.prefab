@@ -110,6 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3543811ff9b6dcb4f8e0ffcc0b6e391a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atmoicNumber: 0
-  elementName: 
+  atmoicNumber: 1
+  elementName: 'Hydrogen '
   type: 1
