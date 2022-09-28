@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using TMPro;
 
 public class ItemSpawner : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class ItemSpawner : MonoBehaviour
     public List<Transform> cardLocations;
     [SerializeField] int cardsTaken;
     bool[] locationSlot;
+
+    public TextMeshProUGUI text;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,7 @@ public class ItemSpawner : MonoBehaviour
             //Debug.Log(cardLocations[c].position);
         }
         startPhrasing(filename);
+        text.text = "DRAW " + cardsRemaining();
     }
 
     public void removeCard(GameObject target)
@@ -116,7 +120,7 @@ public class ItemSpawner : MonoBehaviour
         deck.Add(currentGhost);
     }
 
-    void shuffle() // TODO: current issue with sorting that a element can be pulled twice
+    public void shuffle() // TODO: eventually this will be shuffled to a point where it will only draw 1 type of card please look into this
     {
         List<GameObject> tempDeck = new List<GameObject>();
         bool[] locations = new bool[deck.Capacity]; 
@@ -128,7 +132,7 @@ public class ItemSpawner : MonoBehaviour
 
         for (int c = 0; c < deck.Capacity; c++)
         {
-            int currentLocation = Random.Range(0, deck.Capacity - 1);
+            int currentLocation = Random.Range(0, (int) deck.Capacity - 1);
             while(locations[currentLocation] == true)
             {
                 Debug.Log("THIS WAS TRIGGERED at " + currentLocation);
@@ -138,8 +142,10 @@ public class ItemSpawner : MonoBehaviour
                 }
             }
             tempDeck.Add(deck[currentLocation]);
+            locations[currentLocation] = true;
         }
         deck = tempDeck;
+        text.text = "DRAW " + cardsRemaining();
     }
     
     public void spawnCard(GameObject card, Vector3 location)
@@ -249,10 +255,15 @@ public class ItemSpawner : MonoBehaviour
             locationSlot[slotLocation] = true;
             Instantiate(deck[cardsTaken], cardLocations[slotLocation].position, Quaternion.identity);
             cardsTaken++;
+            text.text = "DRAW " + cardsRemaining();
             return;
         }
         Debug.Log("FAIL CONDITION 2: No slots avaliable");
     }
 
+    public int cardsRemaining()
+    {
+        return deck.Capacity - cardsTaken;
+    }
     
 }
