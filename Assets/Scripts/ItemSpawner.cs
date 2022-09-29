@@ -42,14 +42,14 @@ public class ItemSpawner : MonoBehaviour
             if (lastPostion.Equals(cardLocations[c].position))
             {
                 locationSlot[c] = false;
-                Debug.Log("Slot " + c + " is opened");
+                //Debug.Log("Slot " + c + " is opened");
                 break;
             }
         }
         Destroy(target);
     }
 
-    void startPhrasing(string file)
+    void startPhrasing(string file) // TODO: Find a way to sperate this and find a way to add new elements
     {
         string laPath = string.Format("{0}{1}{2}.txt", Application.dataPath, "/Scripts/", file);
         using StreamReader sr = new StreamReader(laPath);
@@ -61,6 +61,7 @@ public class ItemSpawner : MonoBehaviour
             {
                int aNumber = int.Parse(sr.ReadLine());
                int type = int.Parse(sr.ReadLine());
+               Debug.Log(line + " " + aNumber + " " + type + " was read.");
                //spawnCard(line, aNumber, type, xPlace);
                putCardToDeck(line, aNumber, type);
                xPlace += 2;
@@ -120,7 +121,7 @@ public class ItemSpawner : MonoBehaviour
         deck.Add(currentGhost);
     }
 
-    public void shuffle() // TODO: eventually this will be shuffled to a point where it will only draw 1 type of card please look into this
+    public void shuffle() 
     {
         List<GameObject> tempDeck = new List<GameObject>();
         bool[] locations = new bool[deck.Capacity]; 
@@ -135,7 +136,7 @@ public class ItemSpawner : MonoBehaviour
             int currentLocation = Random.Range(0, (int) deck.Capacity - 1);
             while(locations[currentLocation] == true)
             {
-                Debug.Log("THIS WAS TRIGGERED at " + currentLocation);
+                //Debug.Log("THIS WAS TRIGGERED at " + currentLocation);
                 if (locations[currentLocation] == true)
                 {
                     currentLocation = Random.Range(0, deck.Capacity);
